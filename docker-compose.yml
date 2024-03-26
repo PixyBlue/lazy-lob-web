@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  caddy:
+    build: ./dockers/caddy
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "443:443"
+    volumes:
+      - type: bind
+        source: './Caddyfile'
+        target: /etc/caddy/Caddyfile
+        read_only: true
+      - ./sites:/usr/share/caddy
+      - ./data:/data
+  maildev:
+    image: maildev/maildev
+    container_name: maildev
