@@ -12,7 +12,9 @@ services:
         source: './Caddyfile'
         target: /etc/caddy/Caddyfile
         read_only: true
-      - ./sites:/usr/share/caddy
+      - ./node_modules/htmx.org/dist:/usr/share/caddy/assets/js/htmx
+      - ./node_modules/hyperscript.org/dist:/usr/share/caddy/assets/js/hyperscript
+      - ./app:/usr/share/caddy
       - ./data:/data
   maildev:
     image: maildev/maildev
