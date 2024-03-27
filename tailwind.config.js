@@ -5,9 +5,9 @@
 */
 module.exports = {
     content: ["./app/*.html"],
-    /* chemins à surveiller */
-    plugins: [ /* module indispensable */
-      require('@tailwindcss/typography'), /* permet l'utilisation la classe prose, re-stylant les contenus utiisateurs */
-      require('@tailwindcss/forms'), /* uniformise les formulaires */
+    darkMode: 'selector',
+    plugins: [
+      require('@tailwindcss/typography'),
+      require('@tailwindcss/forms'),
     ],
   }
