@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <script src="/assets/js/htmx/htmx.min.js" defer></script>
         <script src="/assets/js/hyperscript/_hyperscript.min.js" defer></script>
+        <link href="/assets/css/dist/style.css"  rel="stylesheet" />
     </head>
-    <body>
-        <h1>Lazy Lob Web</h1>
-        <div><strong>The One humain fullstack web framework</strong></div>
+    <body class="container mx-auto">
+        <h1 class="text-5xl text-center mt-8 mb-3">Lazy Lob Web</h1>
+        <div class="text-3xl text-center mb-6">The One humain fullstack web framework</div>
 
-        <div>
+        <div class="max-w-[40rem] mx-auto">
             LLW is made by assemblying those parts:
-            <ul>
-                <li><a href="https://caddyserver.com">Caddy</a>, the beautyful web server,</li>
-                <li><a href="https://authcrunch.com">Caddy security</a>, the module for Caddy that allows users and rights management,</li>
-                <li><a href="https://github.com/infogulch/xtemplate-caddy">Caddy x-templates</a>, the module for Caddy that parse templates and query the database,</li>
-                <li><a href="https://tailwindcss.com">TailwindCSS</a>, a utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup,</li>
-                <li><a href="https://htmx.org">htmx</a>, a JavaScript framework that allows to access AJAX, CSS Transitions, WebSockets and Server Sent Events directly in HTML, using attributes,</li>
-                <li><a href="https://hyperscript.org">hyperscript</a>, a scripting language for doing front end web development, designed to make it very easy to respond to events and do simple DOM manipulation in code that is directly embedded on elements on a web page,</li>
-                <li><a href="https://github.com/WingLim/caddy-webhook">Caddy Webhook</a>, the Caddy module that allows serving a webhook to update an app backed by a git repo.</li>
+            <ul class="list-disc list-inside ml-4 mt-2 mb-4">
+                <li><a class="underline text-blue-500" target="_blank" href="https://caddyserver.com">Caddy</a>, the beautyful web server,</li>
+                <li><a class="underline text-blue-500" target="_blank" href="https://authcrunch.com">Caddy security</a>, the module for Caddy that allows users and rights management,</li>
+                <li><a class="underline text-blue-500" target="_blank" href="https://github.com/infogulch/xtemplate-caddy">Caddy x-templates</a>, the module for Caddy that parse templates and query the database,</li>
+                <li><a class="underline text-blue-500" target="_blank" href="https://tailwindcss.com">TailwindCSS</a>, a utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup,</li>
+                <li><a class="underline text-blue-500" target="_blank" href="https://htmx.org">htmx</a>, a JavaScript framework that allows to access AJAX, CSS Transitions, WebSockets and Server Sent Events directly in HTML, using attributes,</li>
+                <li><a class="underline text-blue-500" target="_blank" href="https://hyperscript.org">hyperscript</a>, a scripting language for doing front end web development, designed to make it very easy to respond to events and do simple DOM manipulation in code that is directly embedded on elements on a web page,</li>
+                <li><a class="underline text-blue-500" target="_blank" href="https://github.com/WingLim/caddy-webhook">Caddy Webhook</a>, the Caddy module that allows serving a webhook to update an app backed by a git repo.</li>
             </ul>
-            <p>With all these tools tied together, we could achieve <a href="https://hypermedia.systems/client-side-scripting/#_locality_of_behavior">Locality Of Behavior (LOB)</a> for the fullstack of web development.</p>
+            <p>With all these tools tied together, we could achieve <a class="underline text-blue-500" target="_blank" href="https://hypermedia.systems/client-side-scripting/#_locality_of_behavior">Locality Of Behavior (LOB)</a> for the fullstack of web development and easy web deploiement.</p>
         </div>
     </body>
 </html>
