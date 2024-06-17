@@ -48,6 +48,8 @@
             <li><a class="underline text-blue-500" target="_blank" href="https://github.com/WingLim/caddy-webhook">Caddy
                     Webhook</a>, the Caddy module that allows serving a webhook to update an app backed by a git repo.
             </li>
+            <li><a class="underline text-blue-500" target="_blank" href="https://github.com/git001/caddyv2-upload">Caddy upload</a>,</li>
+            <li><a class="underline text-blue-500" target="_blank" href="https://github.com/corazawaf/coraza-caddy">Caddy Coraza</a>,</li>
         </ul>
         <p>With all these tools tied together, we could achieve <a class="underline text-blue-500" target="_blank"
                 href="https://hypermedia.systems/client-side-scripting/#_locality_of_behavior">Locality Of Behavior
@@ -55,9 +57,9 @@
 
         <h2 class="text-3xl my-4">Componants</h2>
 
-        <div class="grid auto-cols-auto gap-4">
-            <div class="col-start-1 col-end-2 row-start-1 row-end-4 flex items-center justify-center">
-                <div class="float-right mr-2 text-4xl" _="init if cookies['darkmode']==='true' add .dark to <html/>">
+        <div id="dlswitcher" class="grid auto-cols-auto border-2 rounded-lg m-4">
+            <div class="col-start-1 col-end-2 row-start-1 row-end-4 flex items-center justify-center p-4 border-r-2">
+                <div class="mr-2 text-4xl" _="init if cookies['darkmode']==='true' add .dark to <html/>">
                     <button _="on click toggle .dark on <html/>
                                     then toggle .hidden on <span/> in me
                                     then set cookies['darkmode'] to {value: <html/>@class contain 'dark'}
@@ -67,14 +69,16 @@
                     </button>
                 </div>
             </div>
-            <div class="col-start-2 col-end-3 row-start-1">
+            <div class="col-start-2 col-end-3 row-start-1 p-4 border-b-2">
                 <h3 class="text-2xl">Dark/light mode switcher</h3>
             </div>
-            <div class="col-start-2 col-end-3 row-start-2">
-                @todo Comments
+            <div class="col-start-2 col-end-3 row-start-2 p-4 border-b-2">
+                Add a control that enable your users to switch between dark and light mode.<br>
+                To use it, you have to add this line to the module export section of your <code>tailwindcss.config.js</code> file :
+                <pre></pre><code>     darkMode: 'selector',</code></pre>
             </div>
-            <div class="col-start-2 col-end-3 row-start-3">
-                <code><pre>
+            <div class="col-start-2 col-end-3 row-start-3 p-4">
+                <pre><code>
 &lt;div class="float-right mr-2 text-4xl" _="init if cookies['darkmode']==='true' add .dark to &lt;html/&gt;"&gt;
     &lt;button _="on click toggle .dark on &lt;html/&gt;
                 then toggle .hidden on &lt;span/&gt; in me
@@ -84,7 +88,7 @@
         &lt;span title="Switch to dark mode"&gt;🌙&lt;/span&gt;
     &lt;/button&gt;
 &lt;/div&gt;
-                </pre></code>
+                </code></pre>
             </div>
         </div>
 
