@@ -1,2 +1,2 @@
-# lazy-lob-web
-The one-human fullstack ci/cd web lob framework
+# 🦞 Lazy Lob Web
+The One humain fullstack LOB web framework
