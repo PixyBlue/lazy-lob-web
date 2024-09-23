@@ -1,21 +1,50 @@
-version: "3.7"
-
 services:
-  caddy:
+  web:
     build: ./dockers/caddy
     container_name: caddy
     restart: unless-stopped
     ports:
-      - "443:443"
+      - 443:443
     volumes:
       - type: bind
-        source: './Caddyfile'
+        source: ./Caddyfile
         target: /etc/caddy/Caddyfile
         read_only: true
       - ./node_modules/htmx.org/dist:/usr/share/caddy/assets/js/htmx
       - ./node_modules/hyperscript.org/dist:/usr/share/caddy/assets/js/hyperscript
       - ./app:/usr/share/caddy
       - ./data:/data
-  maildev:
+  mail:
     image: maildev/maildev
     container_name: maildev
+    restart: unless-stopped
+
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - DB_ANON_ROLE=${DB_ANON_ROLE}
+      - DB_SCHEMA=${DB_SCHEMA}
+    volumes:
+      # anything in initdb directory is created in the database
+      # see "How to extend this image" section at https://hub.docker.com/r/_/postgres/
+      - ./init/db:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+  api:
+    container_name: postgrest
+    image: postgrest/postgrest:latest
+    environment:
+      - PGRST_DB_URI=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      - PGRST_DB_SCHEMA=${DB_SCHEMA}
+      - PGRST_DB_ANON_ROLE=${DB_ANON_ROLE}
+    restart: unless-stopped
+
+  swagger:
+    container_name: swagger
+    image: swaggerapi/swagger-ui:latest
+    environment:
+      - API_URL=https://api.localhost/
+    restart: unless-stopped
