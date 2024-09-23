@@ -1,0 +1,6 @@
+  swagger:
+    container_name: swagger
+    image: swaggerapi/swagger-ui:latest
+    environment:
+      - API_URL=https://api.localhost/
+    restart: unless-stopped

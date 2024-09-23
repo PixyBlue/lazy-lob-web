@@ -41,10 +41,3 @@ services:
       - PGRST_DB_SCHEMA=${DB_SCHEMA}
       - PGRST_DB_ANON_ROLE=${DB_ANON_ROLE}
     restart: unless-stopped
-
-  swagger:
-    container_name: swagger
-    image: swaggerapi/swagger-ui:latest
-    environment:
-      - API_URL=https://api.localhost/
-    restart: unless-stopped
