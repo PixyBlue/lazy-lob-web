@@ -5,3 +5,8 @@ services:
     environment:
       - API_URL=https://api.localhost/
     restart: unless-stopped
+
+  mail:
+    image: maildev/maildev
+    container_name: maildev
+    restart: unless-stopped
