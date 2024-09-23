@@ -13,11 +13,6 @@ services:
       - ./node_modules/hyperscript.org/dist:/usr/share/caddy/assets/js/hyperscript
       - ./app:/usr/share/caddy
       - ./data:/data
-  mail:
-    image: maildev/maildev
-    container_name: maildev
-    restart: unless-stopped
-
   db:
     image: postgres:alpine
     environment:
