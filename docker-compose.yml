@@ -9,10 +9,24 @@ services:
         source: ./Caddyfile
         target: /etc/caddy/Caddyfile
         read_only: true
+      - type: bind
+        source: ./package.json
+        target: /srv/package.json
+        read_only: true
+      - type: bind
+        source: ./package-lock.json
+        target: /srv/package-lock.json
+      - ./node_modules:/srv/node_modules
       - ./node_modules/htmx.org/dist:/usr/share/caddy/assets/js/htmx
       - ./node_modules/hyperscript.org/dist:/usr/share/caddy/assets/js/hyperscript
-      - ./app:/usr/share/caddy
+      - ./app/public:/usr/share/caddy
+      - ./app/migrations:/srv/db/migrations
       - ./data:/data
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?sslmode=disable
+      - DB_ANON_ROLE=${DB_ANON_ROLE}
+      - DB_SCHEMA=${DB_SCHEMA}
+
   db:
     image: postgres:alpine
     environment:
@@ -22,9 +36,7 @@ services:
       - DB_ANON_ROLE=${DB_ANON_ROLE}
       - DB_SCHEMA=${DB_SCHEMA}
     volumes:
-      # anything in initdb directory is created in the database
-      # see "How to extend this image" section at https://hub.docker.com/r/_/postgres/
-      - ./init/db:/docker-entrypoint-initdb.d
+      - ./data/progres:/var/lib/postgresql/data
     restart: unless-stopped
 
   api:
@@ -34,8 +46,3 @@ services:
       - PGRST_DB_SCHEMA=${DB_SCHEMA}
       - PGRST_DB_ANON_ROLE=${DB_ANON_ROLE}
     restart: unless-stopped
-
-  tools:
-    build: ./dockers/tools
-    volumes:
-      - .:/app

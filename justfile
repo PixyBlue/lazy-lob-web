@@ -1,8 +1,19 @@
+default:
+  just --list
+
+init:
+  docker compose exec web npm install
+  docker compose exec web dbmate up
+  docker compose exec web migrate
+
+init-dev: init
+  sudo trust anchor ./data/caddy/pki/authorities/local/root.crt
+  sudo update-ca-trust
+
 boot:
   docker compose up &
 
-start:
-  just boot
+start: boot
   xdg-open https://localhost
 
 build:
@@ -17,6 +28,21 @@ reload-caddy-config:
 reload:
   just reload-caddy-config
 
-restart:
+reboot:
   just stop
   just boot
+
+shell service:
+  docker compose exec {{service}} /bin/sh
+
+command service command:
+  docker compose exec {{service}} '{{command}}'
+
+open-swagger:
+  xdg-open https://swagger.localhost
+
+open-api:
+  xdg-open https://api.localhost
+
+migrate:
+  just command web migrate
