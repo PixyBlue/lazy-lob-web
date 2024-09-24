@@ -36,6 +36,7 @@ The One humain fullstack LOB web framework
 @todo
 
 ### Start a new project
+@todo
 
 ### Write migrations
 @todo
