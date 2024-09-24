@@ -44,5 +44,8 @@ open-swagger:
 open-api:
   xdg-open https://api.localhost
 
+open:
+  xdg-open https://localhost
+
 migrate:
   just command web migrate
