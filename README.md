@@ -17,6 +17,7 @@ The One humain fullstack LOB web framework
 - [Hyperscript](https://hyperscript.org)
 - [Caddy xtemplate](https://github.com/infogulch/xtemplate-caddy)
 - [Caddy Webhooks](https://github.com/WingLim/caddy-webhook)
+- [Lit](https://ajusa.github.io/lit/docs/lit.html)
 
 ## Roadmap
 
