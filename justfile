@@ -36,7 +36,7 @@ shell service:
   docker compose exec {{service}} /bin/sh
 
 command service command:
-  docker compose exec {{service}} '{{command}}'
+  docker compose exec {{service}} {{command}}
 
 open-swagger:
   xdg-open https://swagger.localhost
