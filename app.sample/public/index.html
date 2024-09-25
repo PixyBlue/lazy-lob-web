@@ -21,14 +21,14 @@
                 parse templates and query the database, parse the markdown</li>
             <li><a target="_blank" href="https://htmx.org">htmx</a>, a JavaScript
                 framework that allows to access AJAX, CSS Transitions, WebSockets and Server Sent Events directly in
-                HTML, using attributes,</li>
+                HTML, using attributes</li>
             <li><a target="_blank" href="https://hyperscript.org">hyperscript</a>, a
                 scripting language for doing front end web development, designed to make it very easy to respond to
-                events and do simple DOM manipulation in code that is directly embedded on elements on a web page,</li>
+                events and do simple DOM manipulation in code that is directly embedded on elements on a web page</li>
             <li><a target="_blank" href="https://github.com/WingLim/caddy-webhook">Caddy
-                    Webhook</a>, the Caddy module that allows serving a webhook to update an app backed by a git repo.
+                    Webhook</a>, the Caddy module that allows serving a webhook to update an app backed by a git repo
             </li>
-            <li><a target="_blank" href="https://github.com/git001/caddyv2-upload">Caddy upload</a>,</li>
+            <li><a target="_blank" href="https://github.com/git001/caddyv2-upload">Caddy upload</a></li>
             <li><a target="_blank" href="https://ajusa.github.io/lit/docs/lit.html">Lit</a>
         </ul>
         <p>With all these tools tied together, we could achieve <a target="_blank"
@@ -37,7 +37,7 @@
 
     <h2>How to start?</h2>
     <pre><code>
-      git init my_project &&\
+      $ git init my_project &&\
         cd my_project &&\
         git submodule add https://github.com/PixyBlue/lazy-lob-web.git &&\
         git submodule update --init &&\
@@ -45,7 +45,7 @@
         just make-project &&\
         cd .. &&\
         just build boot # wait that all the stuff has started
-      just init-dev open # type your password when asked to install local SSL certificates for your browser
+      $ just init-dev open # type your password when asked to install local SSL certificates for your browser
     </code></pre>
 
 </body>
