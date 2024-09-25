@@ -3,6 +3,8 @@ The One humain fullstack LOB web framework
 
 ## Dependencies
 
+- Linux, or, at least, an OS that supports symlinks
+- [Git](https://git-scm.com)
 - [Docker](https://www.docker.com)
 - [Just](https://github.com/casey/just)
 
@@ -31,7 +33,17 @@ The One humain fullstack LOB web framework
 ## Documentation
 
 ### How to start
-@todo
+```bash
+git init my_project &&\
+  cd my_project &&\
+  git submodule add https://github.com/PixyBlue/lazy-lob-web.git &&\
+  git submodule update --init &&\
+  cd lazy-lob-web &&\
+  just make-project &&\
+  cd .. &&\
+  just build boot # wait that all the stuff has started
+just init-dev open # type your password when asked to install local SSL certificates for your browser
+```
 
 ### Just commands
 @todo
