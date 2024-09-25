@@ -21,7 +21,7 @@ services:
       - ./llw/node_modules/hyperscript.org/dist:/usr/share/caddy/assets/js/hyperscript
       - ./app/public:/usr/share/caddy
       - ./app/migrations:/srv/db/migrations
-      - ./llw/data:/data
+      - ./app/data:/data
     environment:
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?sslmode=disable
       - DB_ANON_ROLE=${DB_ANON_ROLE}
