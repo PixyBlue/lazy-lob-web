@@ -1,13 +1,23 @@
 default:
   just --list
 
+make-project:
+  rm app
+  ln -sf .. app
+  cp -rP app.sample/* app/
+  cp -rP app.sample/.env app/
+  cp -rP app.sample/.gitignore app/
+  rm llw
+  ln -sf . llw
+  cd .. ; rm llw ; ln -sf lazy-lob-web llw
+
 init:
   docker compose exec web npm install
   docker compose exec web dbmate up
   docker compose exec web migrate
 
 init-dev: init
-  sudo trust anchor ./data/caddy/pki/authorities/local/root.crt
+  sudo trust anchor ./app/data/caddy/pki/authorities/local/root.crt
   sudo update-ca-trust
 
 boot:

@@ -1,1 +1,1 @@
-app.sample/justfile
+app/justfile

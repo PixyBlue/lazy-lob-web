@@ -10,18 +10,18 @@ services:
         target: /etc/caddy/Caddyfile
         read_only: true
       - type: bind
-        source: ./package.json
+        source: ./llw/package.json
         target: /srv/package.json
         read_only: true
       - type: bind
-        source: ./package-lock.json
+        source: ./llw/package-lock.json
         target: /srv/package-lock.json
-      - ./node_modules:/srv/node_modules
-      - ./node_modules/htmx.org/dist:/usr/share/caddy/assets/js/htmx
-      - ./node_modules/hyperscript.org/dist:/usr/share/caddy/assets/js/hyperscript
+      - ./llw/node_modules:/srv/node_modules
+      - ./llw/node_modules/htmx.org/dist:/usr/share/caddy/assets/js/htmx
+      - ./llw/node_modules/hyperscript.org/dist:/usr/share/caddy/assets/js/hyperscript
       - ./app/public:/usr/share/caddy
       - ./app/migrations:/srv/db/migrations
-      - ./data:/data
+      - ./llw/data:/data
     environment:
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?sslmode=disable
       - DB_ANON_ROLE=${DB_ANON_ROLE}
@@ -36,7 +36,7 @@ services:
       - DB_ANON_ROLE=${DB_ANON_ROLE}
       - DB_SCHEMA=${DB_SCHEMA}
     volumes:
-      - ./data/progres:/var/lib/postgresql/data
+      - ./app/data/progres:/var/lib/postgresql/data
     restart: unless-stopped
 
   api:
