@@ -35,6 +35,18 @@
                 href="https://hypermedia.systems/client-side-scripting/#_locality_of_behavior">Locality Of Behavior
                 (LOB)</a> for the fullstack of web development.</p>
 
+    <h2>How to start?</h2>
+    <pre><code>
+      git init my_project &&\
+        cd my_project &&\
+        git submodule add https://github.com/PixyBlue/lazy-lob-web.git &&\
+        git submodule update --init &&\
+        cd lazy-lob-web &&\
+        just make-project &&\
+        cd .. &&\
+        just build boot # wait that all the stuff has started
+      just init-dev open # type your password when asked to install local SSL certificates for your browser
+    </code></pre>
 
 </body>
 
