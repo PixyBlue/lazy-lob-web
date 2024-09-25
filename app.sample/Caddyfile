@@ -12,6 +12,19 @@ api.localhost {
     reverse_proxy http://api:3000
 }
 
+testxtemplate.localhost {
+  tls internal
+  route {
+    xtemplate {
+      templates_path /usr/share/caddy/templates
+      database {
+          driver sqlite
+          connstr file:todos.db?_pragma=journal_mode(WAL)&_pragma=synchronous(1)&_pragma=foreign_keys(1)&_pragma=auto_vacuum(2)
+      }
+    }
+  }
+}
+
 *.localhost, localhost {
     tls internal
     root * /usr/share/caddy

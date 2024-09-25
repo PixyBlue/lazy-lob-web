@@ -1,0 +1,7 @@
+<title>Hello!</title>
+
+<p>Hello, {{.Req.URL.Query.Get "name" | default "World"}}!</p>
+<hr>
+{{ with $t := .Tx.Query `SELECT 1` }}
+{{$t}}
+{{ end }}
