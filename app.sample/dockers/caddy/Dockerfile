@@ -3,7 +3,8 @@ FROM caddy:builder-alpine AS builder
 RUN xcaddy build \
   --with github.com/infogulch/xtemplate-caddy \
   --with github.com/WingLim/caddy-webhook \
-  --with github.com/jackc/pgx
+  --with github.com/jackc/pgx \
+  --with github.com/greenpau/caddy-security
 
 FROM caddy:alpine
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
