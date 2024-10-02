@@ -6,6 +6,7 @@ The One humain fullstack LOB web framework
 - Linux, or, at least, an OS that supports symlinks
 - [Git](https://git-scm.com)
 - [Docker](https://www.docker.com)
+- [Docker compose](https://docs.docker.com/compose/)
 - [Just](https://github.com/casey/just)
 
 ## What's in the box
