@@ -33,6 +33,7 @@ stop:
   docker compose down
 
 reload-caddy-config:
+  just make-caddyfile
   docker compose exec web caddy reload --config /etc/caddy/Caddyfile
 
 reload:
