@@ -6,8 +6,8 @@ services:
       - 443:443
     volumes:
       - type: bind
-        source: ./Caddyfile
-        target: /etc/caddy/Caddyfile
+        source: ./caddyfile.src.json
+        target: /etc/caddy/caddyfile.src.json
         read_only: true
       - type: bind
         source: ./llw/package.json

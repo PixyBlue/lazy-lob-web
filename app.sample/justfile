@@ -59,3 +59,9 @@ open:
 
 migrate:
   just command web migrate
+
+make-caddyfile:
+  just command web make-caddyfile
+
+logs service:
+  docker compose logs {{service}} -f --tail 0

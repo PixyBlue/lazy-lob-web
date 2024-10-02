@@ -10,6 +10,14 @@
 </head>
 
 <body class="c">
+  <p>Hello, {{.Req.URL.Query.Get "name" | default "World"}}!</p>
+  <hr>
+    {{range .DB.QueryRows `SELECT 'Hello' as salutation,'PostgreSQL' as from`}}
+    <p>{{.salutation}} from {{.from}} !</p>
+    {{end}}
+
+  <hr>
+
     <h1>🦞 Lazy Lob Web</h1>
     <blockquote>The One humain fullstack LOB web framework</blockquote>
     <h2>What's in the box?</h2>
