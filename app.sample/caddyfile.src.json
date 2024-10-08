@@ -70,7 +70,7 @@
                                       "type": "sql",
                                       "name": "DB",
                                       "driver": "pgx",
-                                      "connstr": "$DATABASE_URL"
+                                      "connstr": "$DATABASE_URL_ANON"
                                     }
                                   ]
                                 }
