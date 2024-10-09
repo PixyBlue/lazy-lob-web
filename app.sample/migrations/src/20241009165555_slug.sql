@@ -14,8 +14,11 @@ CREATE TRIGGER set_slug_trigger
 BEFORE INSERT ON private.posts
 FOR EACH ROW
 EXECUTE PROCEDURE set_slug();
+CREATE OR REPLACE VIEW public.posts AS SELECT * FROM private.posts;
+
 
 -- migrate:down
 DROP TRIGGER set_slug_trigger ON private.posts;
 DROP FUNCTION set_slug();
 ALTER TABLE private.posts DROP COLUMN slug;
+CREATE OR REPLACE VIEW public.posts AS SELECT * FROM private.posts;
