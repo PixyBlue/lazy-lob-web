@@ -3,7 +3,7 @@ CREATE SCHEMA IF NOT EXISTS private;
 
 CREATE TABLE IF NOT EXISTS private.posts (
   id UUID PRIMARY KEY DEFAULT generate_ulid(),
-  created_at TIMESTAMPTZ NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   published_at TIMESTAMPTZ,
   title TEXT NOT NULL,
   summary TEXT,
