@@ -17,7 +17,12 @@
     {{end}}
 
   <hr>
-
+  <ul>
+    {{range .DB.QueryRows `SELECT * from posts`}}
+    <li>[{{.published_at.Format "02/01/2006"}}] &nbsp;<a href="/posts/{{.slug}}">{{.title}}</a>&nbsp;- {{.summary}}</li>
+    {{end}}
+  </ul>
+  <hr>
     <h1>🦞 Lazy Lob Web</h1>
     <blockquote>The One humain fullstack LOB web framework</blockquote>
     <h2>What's in the box?</h2>
