@@ -1,3 +1,5 @@
+set dotenv-load
+
 default:
   just --list
 
@@ -14,11 +16,19 @@ make-project:
 init:
   docker compose exec web npm install
   docker compose exec web dbmate up
-  docker compose exec web migrate
+  just migrate
 
 init-dev: init
-  sudo trust anchor ./app/data/caddy/pki/authorities/local/root.crt
+  sudo trust anchor ./app/data/web/pki/authorities/local/root.crt
   sudo update-ca-trust
+
+reinit: stop
+  sudo rm -fR app.sample/data/*
+  touch app.sample/migrations/t.sql
+  rm -f app.sample/migrations/*sql
+  just build
+  just boot
+  sleep 2; just init-dev
 
 boot:
   docker compose up &
@@ -66,3 +76,6 @@ make-caddyfile:
 
 logs service:
   docker compose logs {{service}} -f --tail 0
+
+pg:
+  docker compose exec db psql -U $POSTGRES_USER $POSTGRES_DB
