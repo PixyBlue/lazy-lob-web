@@ -79,3 +79,6 @@ logs service:
 
 pg:
   docker compose exec db psql -U $POSTGRES_USER $POSTGRES_DB
+
+pganon:
+  docker compose exec db psql -U $DB_ANON_ROLE $POSTGRES_DB
