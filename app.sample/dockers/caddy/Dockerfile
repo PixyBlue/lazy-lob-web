@@ -28,6 +28,7 @@ RUN chmod +x /usr/local/bin/migrate
 
 RUN cat > /usr/local/bin/make-caddyfile <<'EOF'
 #!/bin/sh
+find /srv/db/migrations/src/ -name "*.sql" -exec sh -c 'envsubst < "$0" > /srv/db/migrations/"$(basename "$0")"' {} \;
 envsubst < /etc/caddy/caddyfile.src.json > /etc/caddy/caddyfile.json
 EOF
 
