@@ -1,8 +1,9 @@
 {{define "GET /posts/{slug}"}}
-  {{ $slug := .Req.PathValue "slug" }}
-  {{ $query := printf "SELECT title FROM posts WHERE slug='%s'" $slug }}
-  {{ $result := .DB.QueryRow $query }}
-  {{ $result.title}}
+  {{ $result := .DB.QueryRow "SELECT * FROM posts WHERE slug=$1" (.Req.PathValue "slug") }}
+  <h1>{{ $result.title}}</h1>
+  [{{$result.published_at.Format "02/01/2006"}}]
+  {{$result.summary|markdown}}
+  {{$result.content|markdown}}
 {{end}}
 
 <!DOCTYPE html>
