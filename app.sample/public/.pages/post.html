@@ -1,0 +1,31 @@
+{{define "GET /posts/{slug}"}}
+  {{ template "/.parts/head.html" .}}
+  {{ $result := .DB.QueryRow "SELECT * FROM blogposts WHERE slug=$1" (.Req.PathValue "slug") }}
+  <h1>{{ $result.title}}</h1>
+  [{{$result.published_at.Format "02/01/2006"}}]
+  {{$result.summary|markdown}}
+  {{$result.content|markdown}}
+
+  <p>
+    {{ $previous := "" }}
+    {{ $next := "" }}
+    {{ $previousRows := .DB.QueryRows "SELECT title, slug FROM blogposts WHERE published_at < $1 ORDER BY published_at DESC LIMIT 1" $result.published_at }}
+    {{ $nextRows := .DB.QueryRows "SELECT title, slug FROM blogposts WHERE published_at > $1 ORDER BY published_at ASC LIMIT 1" $result.published_at }}
+    {{ if gt (len $previousRows) 0 }}
+      {{ $previous = index $previousRows 0 }}
+    {{ end }}
+    {{ if gt (len $nextRows) 0 }}
+      {{ $next = index $nextRows 0 }}
+    {{ end }}
+    {{ if $previous }}
+      <strong><a href="/posts/{{ $previous.slug }}">Previous: <em>{{$previous.title}}</em></a></strong> -
+    {{ end }}
+    <a href="/blog/">Back to list</a>
+    {{ if $next }}
+     - <strong><a href="/posts/{{ $next.slug }}">Next: <em>{{$next.title}}</em></a></strong>
+    {{ end }}
+
+  </p>
+
+  {{ template "/.parts/foot.html" .}}
+{{end}}

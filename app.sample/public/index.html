@@ -1,38 +1,22 @@
-{{define "GET /posts/{slug}"}}
-  {{ $result := .DB.QueryRow "SELECT * FROM posts WHERE slug=$1" (.Req.PathValue "slug") }}
-  <h1>{{ $result.title}}</h1>
-  [{{$result.published_at.Format "02/01/2006"}}]
-  {{$result.summary|markdown}}
-  {{$result.content|markdown}}
-{{end}}
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Lazy Lob Web 🦞 The One humain fullstack web framework</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="/assets/js/htmx/htmx.min.js" defer></script>
-    <script src="/assets/js/hyperscript/_hyperscript.min.js" defer></script>
-    <link href="/css/style.css" rel="stylesheet" />
-</head>
-
-<body class="c">
-  <p>Hello, {{.Req.URL.Query.Get "name" | default "World"}}!</p>
-  <hr>
-    {{range .DB.QueryRows `SELECT 'Hello' as salutation,'PostgreSQL' as from`}}
-    <p>{{.salutation}} from {{.from}} !</p>
-    {{end}}
-
-  <hr>
-  <ul>
-    {{range .DB.QueryRows `SELECT * from posts`}}
-    <li>[{{.published_at.Format "02/01/2006"}}] &nbsp;<a href="/posts/{{.slug}}">{{.title}}</a>&nbsp;- {{.summary}}</li>
-    {{end}}
-  </ul>
-  <hr>
-    <h1>🦞 Lazy Lob Web</h1>
-    <blockquote>The One humain fullstack LOB web framework</blockquote>
+{{ template "/.parts/head.html" .}}
+    <p>
+      <abbr title="Lazy Lob Web">LLW</abbr> is a web framework designed to be maintained by one single person to create and maintain many projects alone. It is a <em>One Human Framwork</em>.
+    </p>
+    <p>
+      <strong>Currenlty, this projet is at its early stages. DO NOT USE IN PRODUCTION!</strong><br>
+        But you can play with if you are curious.
+    </p>
+    <hr>
+    <h2>Latest news from the blog</h2>
+      <ul>
+        {{range .DB.QueryRows `SELECT * from blogposts ORDER BY published_at DESC LIMIT 5`}}
+        {{ template "/.parts/postslist.html" .}}
+        {{end}}
+      </ul>
+      {{ if gt (.DB.QueryVal `SELECT COUNT(*) AS count FROM blogposts`) 5 }}
+        <p> <strong><a href="/blog/1">More</a></strong></p>
+      {{ end }}
+    <hr>
     <h2>What's in the box?</h2>
         <ul>
             <li><a target="_blank" href="https://caddyserver.com">Caddy</a>, the
@@ -68,7 +52,4 @@
         just build boot # wait that all the stuff has started
       $ just init-dev open # type your password when asked to install local SSL certificates for your browser
     </code></pre>
-
-</body>
-
-</html>
+{{ template "/.parts/foot.html" .}}
