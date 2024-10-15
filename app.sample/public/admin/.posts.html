@@ -1,0 +1,35 @@
+{{ define "GET /admin/posts/{page...}" }}
+  {{ template "/admin/.parts/head.html" .}}
+  {{ $page := or (.Req.PathValue "page") 0 }}
+  {{ $offset := mul $page 5 }}
+  <ul>
+    {{range .DB.QueryRows `SELECT * from blogposts ORDER BY published_at DESC LIMIT 5 OFFSET $1` $offset}}
+    {{ template "/admin/.parts/postslist.html" .}}
+    {{end}}
+  </ul>
+  <p>
+    {{ if ne 0 $offset }}
+      <strong><a href="/blog/{{sub $page 1}}">Next</a></strong>
+    {{ end }}
+    {{ if gt (.DB.QueryVal `SELECT count(*) FROM (SELECT 1 FROM blogposts ORDER BY published_at DESC LIMIT 1 OFFSET $1) AS subquery;
+  ` (add $offset 1)) 0 }}
+      <strong><a href="/blog/{{add 1 $page}}">Previous</a></strong>
+    {{ end }}
+  </p>
+  {{ template "/admin/.parts/foot.html" .}}
+{{ end }}
+
+
+{{ define "GET /admin/posts/edit/{id}" }}
+{{ template "/admin/.parts/head.html" .}}
+ {{ $result := .DB.QueryRow "SELECT * FROM blogposts WHERE id=$1" (.Req.PathValue "id") }}
+ <form method="post">
+   <input name="title" value="{{$result.title}}">
+   <input name="published" value="true" type="checkbox" {{if eq $result.published true}}checked{{end}}>
+   <input name="published_at" value="{{$result.published_at}}" type="datetime">
+   <textarea name="summary">{{$result.summary}}</textarea>
+   <textarea name="content">{{$result.content}}</textarea>
+   <input type="submit">
+ </form>
+ {{ template "/admin/.parts/foot.html" .}}
+{{ end }}
