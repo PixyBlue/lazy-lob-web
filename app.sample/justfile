@@ -34,7 +34,7 @@ boot:
   docker compose up &
 
 start: boot
-  xdg-open https://localhost
+  xdg-open https://localhost &>/dev/null &
 
 build:
   docker compose build
@@ -60,13 +60,13 @@ command service command:
   docker compose exec {{service}} {{command}}
 
 open-swagger:
-  xdg-open https://swagger.localhost
+  xdg-open https://swagger.localhost &>/dev/null &
 
 open-api:
-  xdg-open https://api.localhost
+  xdg-open https://api.localhost &>/dev/null &
 
 open:
-  xdg-open https://localhost
+  xdg-open https://localhost &>/dev/null &
 
 migrate:
   just command web migrate
