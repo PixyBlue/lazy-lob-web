@@ -10,15 +10,15 @@ services:
         target: /etc/caddy/caddyfile.src.json
         read_only: true
       - type: bind
-        source: ./llw/package.json
+        source: ./package.json
         target: /srv/package.json
         read_only: true
       - type: bind
-        source: ./llw/package-lock.json
+        source: ./package-lock.json
         target: /srv/package-lock.json
-      - ./llw/node_modules:/srv/node_modules
-      - ./llw/node_modules/htmx.org/dist:/usr/share/caddy/assets/js/htmx
-      - ./llw/node_modules/hyperscript.org/dist:/usr/share/caddy/assets/js/hyperscript
+      - ./node_modules:/srv/node_modules
+      - ./node_modules/htmx.org/dist:/usr/share/caddy/assets/js/htmx
+      - ./node_modules/hyperscript.org/dist:/usr/share/caddy/assets/js/hyperscript
       - ./app/public:/usr/share/caddy
       - ./app/migrations:/srv/db/migrations
       - ./app/data/web:/data/caddy
@@ -39,7 +39,7 @@ services:
       - DB_ANON_ROLE=${DB_ANON_ROLE}
       - DB_SCHEMA=${DB_SCHEMA}
     volumes:
-      - ./app/data/db:/var/lib/postgresql/data
+      - ./data/db:/var/lib/postgresql/data
     restart: unless-stopped
 
   api:

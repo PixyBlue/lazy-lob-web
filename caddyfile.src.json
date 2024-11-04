@@ -1,1 +1,109 @@
-app/caddyfile.src.json
+{
+  "logging": { "logs": { "default": { "level": "DEBUG" } } },
+  "apps": {
+    "http": {
+      "servers": {
+        "srv0": {
+          "listen": [":443"],
+          "routes": [
+            {
+              "match": [{ "host": ["swagger.localhost"] }],
+              "handle": [
+                {
+                  "handler": "subroute",
+                  "routes": [
+                    {
+                      "handle": [
+                        {
+                          "handler": "reverse_proxy",
+                          "upstreams": [{ "dial": "swagger:8080" }]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "terminal": true
+            },
+            {
+              "match": [{ "host": ["api.localhost"] }],
+              "handle": [
+                {
+                  "handler": "subroute",
+                  "routes": [
+                    {
+                      "handle": [
+                        {
+                          "handler": "reverse_proxy",
+                          "upstreams": [{ "dial": "api:3000" }]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "terminal": true
+            },
+            {
+              "match": [{ "host": ["*.localhost", "localhost"] }],
+              "handle": [
+                {
+                  "handler": "subroute",
+                  "routes": [
+                    {
+                      "handle": [
+                        { "handler": "vars", "root": "/usr/share/caddy" },
+                        {
+                          "handler": "subroute",
+                          "routes": [
+                            {
+                              "handle": [
+                                {
+                                  "handler": "xtemplate",
+                                  "left": "{{",
+                                  "right": "}}",
+                                  "template_extension": ".html",
+                                  "templates_dir": "/usr/share/caddy",
+                                  "watch_context_path": false,
+                                  "watch_template_path": true,
+                                  "dot": [{
+                                      "type": "sql",
+                                      "name": "DB",
+                                      "driver": "pgx",
+                                      "connstr": "$DATABASE_URL"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        { "handler": "file_server", "hide": ["./Caddyfile"] }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "terminal": true
+            }
+          ]
+        }
+      }
+    },
+    "tls": {
+      "automation": {
+        "policies": [
+          {
+            "subjects": [
+              "swagger.localhost",
+              "api.localhost",
+              "*.localhost",
+              "localhost"
+            ],
+            "issuers": [{ "module": "internal" }]
+          }
+        ]
+      }
+    }
+  }
+}

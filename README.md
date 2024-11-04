@@ -27,22 +27,17 @@ The One humain fullstack LOB web framework
 
 - [ ] Sample app
 - [ ] Documentation
-- [ ][Caddy Coraza](https://github.com/corazawaf/coraza-caddy)
-- [ ][Caddy upload](https://github.com/git001/caddyv2-upload)?
-- [ ][Caddy Pixbooster](https://github.com/PixyBlue/caddy-pixbooster)
-- [ ][Caddy image processor](https://github.com/quix-labs/caddy-image-processor)
+- [ ] [Caddy Coraza](https://github.com/corazawaf/coraza-caddy)
+- [ ] [Caddy upload](https://github.com/git001/caddyv2-upload)?
+- [ ] [Caddy Pixbooster](https://github.com/PixyBlue/caddy-pixbooster)
+- [ ] [Caddy image processor](https://github.com/quix-labs/caddy-image-processor)
 
 ## Documentation
 
-### How to start
+### How to start the demo app
 ```bash
-git init my_project &&\
-  cd my_project &&\
-  git submodule add https://github.com/PixyBlue/lazy-lob-web.git &&\
-  git submodule update --init &&\
+git clone https://github.com/PixyBlue/lazy-lob-web.git &&\
   cd lazy-lob-web &&\
-  just make-project &&\
-  cd .. &&\
   just build boot # wait that all the stuff has started
 just init-dev open # type your password when asked to install local SSL certificates for your browser
 ```
