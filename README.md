@@ -35,12 +35,31 @@ The One humain fullstack LOB web framework
 ## Documentation
 
 ### How to start the demo app
+
+On Linus: 
+
 ```bash
 git clone https://github.com/PixyBlue/lazy-lob-web.git &&\
   cd lazy-lob-web &&\
   just build boot # wait that all the stuff has started
 just init-dev open # type your password when asked to install local SSL certificates for your browser
 ```
+
+On Mac:
+
+With docker runner as Orb stack ( https://orbstack.dev )
+
+
+```bash
+git clone https://github.com/PixyBlue/lazy-lob-web.git &&\
+  cd lazy-lob-web &&\
+  just build boot # wait that all the stuff has started
+just init # to setup the db.
+```
+
+![Mac Orbstack Runner](./docs/mac-orbstack.png)
+
+![Mac Orbstack Browser](./docs/mac-browser.png)
 
 ### Just commands
 @todo
