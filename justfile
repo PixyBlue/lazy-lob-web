@@ -9,7 +9,7 @@ init:
   just migrate
 
 init-dev: init
-  sudo trust anchor ./app/data/web/pki/authorities/local/root.crt
+  sudo trust anchor ./data/web/pki/authorities/local/root.crt
   sudo update-ca-trust
 
 boot:
